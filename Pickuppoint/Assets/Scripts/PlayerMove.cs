@@ -47,6 +47,14 @@ public class PlayerMove : MonoBehaviour
             isGrounded = true;
         }
     }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Grounded")
+        {
+            animator.SetBool("jump", false);
+            isGrounded = true;
+        }
+    }
     void Run()
     {
         Vector3 playerVelocity = new Vector3(moveInput.x * walkSpeed,myRigidbody.velocity.y, moveInput.y * walkSpeed);
