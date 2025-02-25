@@ -1369,6 +1369,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 10
+  jumpPower: 5
+  isGrounded: 1
 --- !u!1 &2280780501533800112
 GameObject:
   m_ObjectHideFlags: 0
