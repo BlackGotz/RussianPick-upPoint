@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Vadyao-san\\UnityProjects\\RussianPick-upPoint\\Pickuppoint\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{34FC6C73-DB23-29F0-75AA-D500BCC7CE8A}|Assembly-CSharp.csproj|c:\\users\\vadyao-san\\unityprojects\\russianpick-uppoint\\pickuppoint\\assets\\scripts\\inputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34FC6C73-DB23-29F0-75AA-D500BCC7CE8A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\inputmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{34FC6C73-DB23-29F0-75AA-D500BCC7CE8A}|Assembly-CSharp.csproj|c:\\users\\vadyao-san\\unityprojects\\russianpick-uppoint\\pickuppoint\\assets\\scripts\\playerlook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{34FC6C73-DB23-29F0-75AA-D500BCC7CE8A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playerlook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34FC6C73-DB23-29F0-75AA-D500BCC7CE8A}|Assembly-CSharp.csproj|c:\\users\\vadyao-san\\unityprojects\\russianpick-uppoint\\pickuppoint\\assets\\scripts\\playermove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34FC6C73-DB23-29F0-75AA-D500BCC7CE8A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playermove.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34FC6C73-DB23-29F0-75AA-D500BCC7CE8A}|Assembly-CSharp.csproj|C:\\Users\\Vadyao-san\\UnityProjects\\RussianPick-upPoint\\Pickuppoint\\assets\\scripts\\playermotor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34FC6C73-DB23-29F0-75AA-D500BCC7CE8A}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\playermotor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,33 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PlayerLook.cs",
               "DocumentMoniker": "C:\\Users\\Vadyao-san\\UnityProjects\\RussianPick-upPoint\\Pickuppoint\\Assets\\Scripts\\PlayerLook.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerLook.cs",
               "ToolTip": "C:\\Users\\Vadyao-san\\UnityProjects\\RussianPick-upPoint\\Pickuppoint\\Assets\\Scripts\\PlayerLook.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlayerLook.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-01T10:20:55.677Z",
+              "WhenOpened": "2025-03-02T10:17:56.549Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PlayerMove.cs",
-              "DocumentMoniker": "C:\\Users\\Vadyao-san\\UnityProjects\\RussianPick-upPoint\\Pickuppoint\\Assets\\Scripts\\PlayerMove.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerMove.cs",
-              "ToolTip": "C:\\Users\\Vadyao-san\\UnityProjects\\RussianPick-upPoint\\Pickuppoint\\Assets\\Scripts\\PlayerMove.cs",
-              "RelativeToolTip": "Assets\\Scripts\\PlayerMove.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "InputManager.cs",
+              "DocumentMoniker": "C:\\Users\\Vadyao-san\\UnityProjects\\RussianPick-upPoint\\Pickuppoint\\Assets\\Scripts\\InputManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\InputManager.cs",
+              "ToolTip": "C:\\Users\\Vadyao-san\\UnityProjects\\RussianPick-upPoint\\Pickuppoint\\Assets\\Scripts\\InputManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\InputManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-01T10:20:35.596Z",
+              "WhenOpened": "2025-03-02T09:44:35.889Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "PlayerMotor.cs",
+              "DocumentMoniker": "C:\\Users\\Vadyao-san\\UnityProjects\\RussianPick-upPoint\\Pickuppoint\\Assets\\Scripts\\PlayerMotor.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\PlayerMotor.cs",
+              "ToolTip": "C:\\Users\\Vadyao-san\\UnityProjects\\RussianPick-upPoint\\Pickuppoint\\Assets\\Scripts\\PlayerMotor.cs",
+              "RelativeToolTip": "Assets\\Scripts\\PlayerMotor.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwCMAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-02T09:48:22.504Z"
             }
           ]
         }
