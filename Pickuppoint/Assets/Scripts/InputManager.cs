@@ -7,9 +7,10 @@ using UnityEngine.InputSystem;
 public class InputManager : MonoBehaviour
 {
     private PlayerInput playerInput;
-    private PlayerInput.OnFootActions onFoot;
     private PlayerLook look;
-    private PlayerMotor motor;
+    private PlayerMotor motor; 
+
+    public PlayerInput.OnFootActions onFoot;
     // Start is called before the first frame update
     void Awake()
     {
