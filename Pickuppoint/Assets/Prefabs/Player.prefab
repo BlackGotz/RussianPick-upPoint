@@ -160,12 +160,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 817158211706944967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40ba407f7325cd14b9581ca6dbad0ba7, type: 3}
+  m_Script: {fileID: 11500000, guid: 628430354e2690841ad18e6c9f0b574f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  gravity: -9.8
-  jumpHeight: 3
+  distance: 3
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &5029577111438978798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,7 +176,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 817158211706944967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70451e05019016c47942550936d1b419, type: 3}
+  m_Script: {fileID: 11500000, guid: 48d82fe89fff98148a121380c23af98a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 6767995894580094107}
@@ -190,13 +191,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 817158211706944967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76be2f245c3ca1f428cc49868b4390be, type: 3}
+  m_Script: {fileID: 11500000, guid: ebde3c21f17aa614981848dc522de1c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 3
-  mask:
-    serializedVersion: 2
-    m_Bits: 64
+  speed: 5
+  gravity: -9.8
+  jumpHeight: 3
 --- !u!114 &1763162690717697831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,9 +206,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 817158211706944967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8089b20f0d69d40a24230386a6c524, type: 3}
+  m_Script: {fileID: 11500000, guid: c17d98425c7a02e4abbf5b88acf0f2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  promtText: {fileID: 4219698709409855058}
 --- !u!114 &1619767228200454975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,10 +219,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 817158211706944967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 446f18dd0460ce945892a6ea62c3d1a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 7023360a74e8c9848a0c433feb8e747d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promtText: {fileID: 4219698709409855058}
 --- !u!1 &1554687744526334555
 GameObject:
   m_ObjectHideFlags: 0
