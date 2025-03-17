@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5431050993636365720}
   - component: {fileID: 6489191517225059597}
   - component: {fileID: 220435360010450854}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,9 +30,9 @@ Transform:
   m_GameObject: {fileID: 5557635097326427028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.115, y: 1.996, z: -9.882}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 8.737, y: 1.14, z: -15.566}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -143,8 +143,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5557635097326427028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d41dfe7da2a302b41a5e9f0b812b9d8e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e42c2db84738114fa34f305baf5cbce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptMessage: "\u041C\u043E\u0436\u0435\u0448\u044C \u0432\u0437\u044F\u0442\u044C
-    \u044D\u0442\u0443 \u043A\u043E\u0440\u043E\u0431\u043A\u0443"
+  promptMessage: Press 'E' to grab
