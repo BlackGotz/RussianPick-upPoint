@@ -665,7 +665,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1279561549187176308, guid: f9526b7c12770f14aa830082aa6d9b45, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9526b7c12770f14aa830082aa6d9b45, type: 3}
@@ -2609,6 +2610,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1357932022}
     m_Modifications:
+    - target: {fileID: 1321853952504678, guid: 7c09194ef6a23a947948e105b6da62b2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1417219977137284, guid: 7c09194ef6a23a947948e105b6da62b2, type: 3}
       propertyPath: m_Name
       value: Lamp_3_prefab
@@ -2711,7 +2716,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5719575844442624996, guid: 9094aa5ae2e324346997aa2ea9ad7930, type: 3}
+    - {fileID: -672345488160321305, guid: 9094aa5ae2e324346997aa2ea9ad7930, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9094aa5ae2e324346997aa2ea9ad7930, type: 3}
@@ -11884,6 +11891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   promptMessage: Press 'E' to grab
+  throwForce: 10
 --- !u!4 &8739434758125054015
 Transform:
   m_ObjectHideFlags: 0

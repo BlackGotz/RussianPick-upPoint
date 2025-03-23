@@ -6,6 +6,7 @@ public class OrderBox : Interactable
 {
     private Transform playerHand; // Ссылка на руку игрока
     private bool isHeld = false;  // Флаг, держит ли игрок предмет
+    public float throwForce = 10f; // Сила броска
 
     void Start()
     {
@@ -59,5 +60,27 @@ public class OrderBox : Interactable
 
         isHeld = false;
         Debug.Log("Dropped " + gameObject.name);
+    }
+
+    protected override void Throw(Vector3 direction)
+    {
+        if (isHeld)
+        {
+            // Включаем физику обратно перед броском
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+                rb.useGravity = true;
+
+                // Задаем бросок в направлении взгляда игрока
+                rb.AddForce(direction * throwForce, ForceMode.VelocityChange);
+            }
+
+            // Убираем родителя после броска
+            transform.SetParent(null);
+            isHeld = false;
+            Debug.Log("Threw " + gameObject.name);
+        }
     }
 }

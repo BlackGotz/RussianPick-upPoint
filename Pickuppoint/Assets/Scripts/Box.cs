@@ -1,17 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Box : MonoBehaviour
 {
     public int boxNumber;
-    private Text boxNumberDisplay;
+    private TextMeshPro boxNumberDisplay;
 
     private void Awake()
     {
         // Если ссылка не задана через инспектор, попытаемся найти Text среди дочерних объектов.
         if (boxNumberDisplay == null)
         {
-            boxNumberDisplay = GetComponentInChildren<Text>();
+            boxNumberDisplay = GetComponentInChildren<TextMeshPro>();
         }
     }
 

@@ -9,6 +9,7 @@ public class PlayerIntetact : MonoBehaviour
     [SerializeField] private LayerMask mask;
     private PlayerUI playerUI;
     private InputManager inputManager;
+    private Interactable currentInteractable;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class PlayerIntetact : MonoBehaviour
         cam = GetComponent<PlayerLook>().cam;
         playerUI = GetComponent<PlayerUI>();
         inputManager = GetComponent<InputManager>();
+
     }
 
     // Update is called once per frame
@@ -28,15 +30,30 @@ public class PlayerIntetact : MonoBehaviour
         RaycastHit hitInfo; //Собираем информацию, куда попал луч
         if (Physics.Raycast(ray, out hitInfo, distance, mask))
         {
-            if(hitInfo.collider.GetComponent<Interactable>() != null)
+            Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+            if (interactable != null)
             {
-                Interactable interactable = hitInfo.collider.GetComponent<Interactable>();
+                currentInteractable = interactable;
                 playerUI.UpdateText(interactable.promptMessage);
+
+                // Проверяем взаимодействие
                 if (inputManager.onFoot.Interact.triggered)
                 {
+                    Debug.Log("Условие взятия " + gameObject.name);
                     interactable.BaseInteract();
                 }
             }
+            else
+            {
+                currentInteractable = null;
+            }
+        }
+        // Проверяем бросок отдельно от взаимодействия
+        if (inputManager.onFoot.Throw.triggered && currentInteractable != null)
+        {
+            Debug.Log("Условие броска " + gameObject.name);
+            Vector3 throwDirection = ray.direction;  // Используем направление луча
+            currentInteractable.BaseThrow(throwDirection);
         }
     }
 }

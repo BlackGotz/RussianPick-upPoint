@@ -10,9 +10,18 @@ public abstract class Interactable : MonoBehaviour
     {
         Interact();
     }
+    public void BaseThrow(Vector3 throwDirection)
+    {
+        Throw(throwDirection);
+    }
 
 
     protected virtual void Interact()
+    {
+
+    }
+
+    protected virtual void Throw(Vector3 direction)
     {
 
     }
