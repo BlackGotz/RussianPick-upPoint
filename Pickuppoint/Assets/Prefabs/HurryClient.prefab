@@ -196,7 +196,7 @@ Transform:
   - {fileID: 671960061206184619}
   - {fileID: 2403980226232836730}
   - {fileID: 604037457822168757}
-  - {fileID: 8057128669430638586}
+  - {fileID: 4451453147523405742}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &181433917992380989
@@ -2434,7 +2434,7 @@ Transform:
   - {fileID: 5505881253594001908}
   m_Father: {fileID: 8456120262477882691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1584856699586833744
+--- !u!1001 &5181563027806182660
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2451,16 +2451,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.19158596
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.107808
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.49947128
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.542
+      value: 0.934
       objectReference: {fileID: 0}
     - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.771
+      value: 0.4971
       objectReference: {fileID: 0}
     - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2495,8 +2507,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
---- !u!4 &8057128669430638586 stripped
+--- !u!4 &4451453147523405742 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
-  m_PrefabInstance: {fileID: 1584856699586833744}
+  m_PrefabInstance: {fileID: 5181563027806182660}
   m_PrefabAsset: {fileID: 0}

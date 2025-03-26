@@ -18,6 +18,11 @@ public class RecieveScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Box box = other.GetComponent<Box>(); // Проверяем, является ли вошедший объект коробкой
+        Interactable item = other.GetComponent<Interactable>();
+        if (item.GetIsThrown())
+            {
+                Debug.Log("Предмет был брошен!");
+            }
         if (box != null)
         {
             if (currentClient != null)

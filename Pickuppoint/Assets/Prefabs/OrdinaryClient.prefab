@@ -196,7 +196,7 @@ Transform:
   - {fileID: 671960061206184619}
   - {fileID: 2403980226232836730}
   - {fileID: 1018650710100912541}
-  - {fileID: 1252289382023394019}
+  - {fileID: 4759310374442991201}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &181433917992380989
@@ -2434,7 +2434,7 @@ Transform:
   - {fileID: 5505881253594001908}
   m_Father: {fileID: 8456120262477882691}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &7732442643547650121
+--- !u!1001 &4044890534786069707
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2451,16 +2451,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.19158596
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.107808
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.34436795
+      objectReference: {fileID: 0}
+    - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.542
+      value: 0.934
       objectReference: {fileID: 0}
     - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.771
+      value: 0.4195
       objectReference: {fileID: 0}
     - target: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2495,8 +2507,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
---- !u!4 &1252289382023394019 stripped
+--- !u!4 &4759310374442991201 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8804010688885426858, guid: c9b6dbe66680b4a4bb7897ff44696335, type: 3}
-  m_PrefabInstance: {fileID: 7732442643547650121}
+  m_PrefabInstance: {fileID: 4044890534786069707}
   m_PrefabAsset: {fileID: 0}

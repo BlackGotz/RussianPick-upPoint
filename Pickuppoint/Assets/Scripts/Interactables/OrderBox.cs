@@ -66,8 +66,6 @@ public class OrderBox : Interactable
     {
         if (isHeld)
         {
-            // Включаем физику обратно перед броском
-            Rigidbody rb = GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.isKinematic = false;
