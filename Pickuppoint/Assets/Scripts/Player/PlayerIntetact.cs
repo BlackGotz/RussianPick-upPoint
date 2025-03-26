@@ -39,7 +39,7 @@ public class PlayerIntetact : MonoBehaviour
                 // Проверяем взаимодействие
                 if (inputManager.onFoot.Interact.triggered)
                 {
-                    Debug.Log("Условие взятия " + gameObject.name);
+                    //Debug.Log("Условие взятия " + gameObject.name);
                     interactable.BaseInteract();
                 }
             }

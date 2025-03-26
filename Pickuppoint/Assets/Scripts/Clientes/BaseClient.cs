@@ -21,6 +21,7 @@ public abstract class BaseClient : MonoBehaviour
     {
         currentPatience = maxPatience;
         isDelivered = false;
+        ToggleRecieveTrigger(false);
 
         if (patienceBar != null)
             patienceBar.gameObject.SetActive(false);
@@ -39,6 +40,8 @@ public abstract class BaseClient : MonoBehaviour
 
                     patienceBar.gameObject.SetActive(true);
                     patienceBar.UpdateBar(currentPatience, maxPatience);
+
+                    ToggleRecieveTrigger(true); // Включаем триггер
                 }
                 break;
 
@@ -78,6 +81,26 @@ public abstract class BaseClient : MonoBehaviour
     }
 
     /// <summary>
+    /// Включает или отключает триггер получения коробки
+    /// </summary>
+    private void ToggleRecieveTrigger(bool isActive)
+    {
+        RecieveScript trigger = GetComponentInChildren<RecieveScript>();
+        if (trigger != null)
+        {
+            Collider triggerCollider = trigger.GetComponent<Collider>();
+            if (triggerCollider != null)
+            {
+                triggerCollider.enabled = isActive;
+                //Debug.Log($"RecieveTrigger {(isActive ? "активирован" : "деактивирован")} для {gameObject.name}");
+            }
+        }
+    }
+
+
+
+
+    /// <summary>
     /// Подготовка клиента к уходу – скрываем телефон, разворачиваем и переводим в состояние Leaving.
     /// </summary>
     protected void PrepareToLeave()
@@ -85,6 +108,9 @@ public abstract class BaseClient : MonoBehaviour
         UIManager.Instance.HidePhoneDisplay();
         if (patienceBar != null)
             patienceBar.gameObject.SetActive(false);
+
+        ToggleRecieveTrigger(false); // Выключаем триггер
+
         TurnAround();
         state = ClientState.Leaving;
     }
