@@ -6,8 +6,8 @@ public abstract class BaseClient : MonoBehaviour
     public int requiredBoxNumber;
     public float moveSpeed = 2f;
     public float maxPatience = 10f;
-    protected float currentPatience;
-
+    public float currentPatience;
+    Animator animator;
     protected enum ClientState { MovingToPickup, Waiting, Leaving }
     protected ClientState state = ClientState.MovingToPickup;
 
@@ -16,9 +16,11 @@ public abstract class BaseClient : MonoBehaviour
     protected bool isDelivered;
 
     [SerializeField] protected PatienceBar patienceBar;
-
+    
     protected virtual void Start()
     {
+        animator = GetComponent<Animator>();
+        animator.SetBool("move", true);
         currentPatience = maxPatience;
         isDelivered = false;
         ToggleRecieveTrigger(false);
@@ -36,6 +38,7 @@ public abstract class BaseClient : MonoBehaviour
                 if (Vector3.Distance(transform.position, pickupPoint.position) < 0.1f)
                 {
                     state = ClientState.Waiting;
+                    animator.SetBool("move", false);
                     UIManager.Instance.ShowClientPhone(GetDisplayText());
 
                     patienceBar.gameObject.SetActive(true);
@@ -112,6 +115,7 @@ public abstract class BaseClient : MonoBehaviour
         ToggleRecieveTrigger(false); // Выключаем триггер
 
         TurnAround();
+        animator.SetBool("move", true);
         state = ClientState.Leaving;
     }
 
@@ -144,6 +148,19 @@ public abstract class BaseClient : MonoBehaviour
         {
             Debug.Log("Неверная коробка");
             currentPatience -= maxPatience / 3f;
+        }
+    }
+
+    public virtual void InstantLeave()
+    {
+        if (state == ClientState.MovingToPickup) 
+        {
+            PrepareToLeave();
+            state = ClientState.Leaving;
+        }
+        else
+        {
+            currentPatience = 0f;
         }
     }
 }
