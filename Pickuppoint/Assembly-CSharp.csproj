@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Managers\TimeManager.cs" />
     <Compile Include="Assets\Scripts\Interactables\OrderBox.cs" />
     <Compile Include="Assets\Scripts\HitTrigger.cs" />
+    <Compile Include="Assets\Scripts\DoorController.cs" />
     <Compile Include="Assets\Scripts\Clientes\BaseClient.cs" />
     <Compile Include="Assets\Input\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
