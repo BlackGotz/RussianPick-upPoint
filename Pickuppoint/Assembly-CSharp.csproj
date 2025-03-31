@@ -69,6 +69,8 @@
     <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerIntetact.cs" />
     <Compile Include="Assets\Scripts\Managers\TimeManager.cs" />
+    <Compile Include="Assets\Scripts\Computer.cs" />
+    <Compile Include="Assets\Scripts\ComputerUIController.cs" />
     <Compile Include="Assets\Scripts\Interactables\OrderBox.cs" />
     <Compile Include="Assets\Scripts\HitTrigger.cs" />
     <Compile Include="Assets\Scripts\DoorController.cs" />

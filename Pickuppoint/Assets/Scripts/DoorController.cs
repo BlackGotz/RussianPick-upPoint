@@ -10,11 +10,12 @@ public class DoorController : Interactable
     private float targetAngle;
     private float closedAngle;
     private float openAngle;
+    public float side = 1f;
     private void Start()
     {
         // Устанавливаем начальный угол двери
         closedAngle = _door.localEulerAngles.y;
-        openAngle = closedAngle + 90f; // Поворот на 180 градусов
+        openAngle = closedAngle + side*90f; // Поворот на 180 градусов
         targetAngle = closedAngle;
     }
 
