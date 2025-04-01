@@ -34,7 +34,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        timeToNextClient = Random.Range(5f, 10f);
+        timeToNextClient = (float)Random.Range(5, 10);
         SpawnBoxes();
         TimeManager.Instance.OnTimeUpdated += OnTimeUpdated;
     }
@@ -109,7 +109,8 @@ public class SpawnManager : MonoBehaviour
         {
             availableBoxNumbers.Remove(deliveredBoxNumber);
         }
-        timeToNextClient = Random.Range(5f, 10f);
-        UIManager.Instance.HidePhoneDisplay();
+        timeToNextClient = (float)Random.Range(5, 10);
+        Debug.Log("Время до клиента" + timeToNextClient);
+        //UIManager.Instance.HidePhoneDisplay();
     }
 }

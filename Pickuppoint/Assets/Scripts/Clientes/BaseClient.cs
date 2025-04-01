@@ -101,8 +101,6 @@ public abstract class BaseClient : MonoBehaviour
     }
 
 
-
-
     /// <summary>
     /// Подготовка клиента к уходу – скрываем телефон, разворачиваем и переводим в состояние Leaving.
     /// </summary>
@@ -156,7 +154,6 @@ public abstract class BaseClient : MonoBehaviour
         if (state == ClientState.MovingToPickup) 
         {
             PrepareToLeave();
-            state = ClientState.Leaving;
         }
         else
         {
