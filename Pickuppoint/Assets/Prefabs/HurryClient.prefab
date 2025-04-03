@@ -170,7 +170,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7000874400613466313}
   - component: {fileID: 181433917992380989}
-  - component: {fileID: 456241445896129702}
   - component: {fileID: -3882085044221683015}
   m_Layer: 0
   m_Name: HurryClient
@@ -192,11 +191,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 604037457822168757}
   - {fileID: 6292299965191486875}
   - {fileID: 3753819170851150789}
   - {fileID: 671960061206184619}
   - {fileID: 2403980226232836730}
-  - {fileID: 604037457822168757}
   - {fileID: 1773355966600368825}
   - {fileID: 9000995231323955929}
   m_Father: {fileID: 0}
@@ -222,23 +221,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &456241445896129702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 849919455824956727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af8b92bce7c3acc489b52ba788bb2ed0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requiredBoxNumber: 0
-  moveSpeed: 2
-  maxPatience: 100
-  currentPatience: 0
-  patienceBar: {fileID: 7679366637365489082}
 --- !u!114 &-3882085044221683015
 MonoBehaviour:
   m_ObjectHideFlags: 0

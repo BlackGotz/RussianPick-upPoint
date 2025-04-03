@@ -10680,9 +10680,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87118be37cda3014e8e8823119f87c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ordinaryClientPrefab: {fileID: 849919455824956727, guid: 678bf8bc91771fa498236de892b83d1d, type: 3}
-  hurryClientPrefab: {fileID: 849919455824956727, guid: a918afdb9de181440acdf916c1258a10, type: 3}
-  mysteriousClientPrefab: {fileID: 849919455824956727, guid: 3f0e0a0c2de8fc748a26991530a0503a, type: 3}
+  clientModels:
+  - {fileID: 849919455824956727, guid: a918afdb9de181440acdf916c1258a10, type: 3}
   clientSpawnPoint: {fileID: 297573834}
   pickupPoint: {fileID: 598900375}
   boxPrefab: {fileID: 1192641458597302, guid: 6061446c8858f044aa288f9a9c2e1c8a, type: 3}

@@ -22,7 +22,7 @@ public class RecieveScript : MonoBehaviour
         {
             if (currentClient != null)
             {
-                currentClient.ReceiveBox(box);
+                currentClient.ReceiveBox(box); 
                 //Debug.Log($"Box {box.name} передан клиенту {currentClient.name}");
             }
             else
