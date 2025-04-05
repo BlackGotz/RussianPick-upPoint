@@ -66,17 +66,18 @@
     <Compile Include="Assets\Scripts\Box.cs" />
     <Compile Include="Assets\Scripts\RecieveScript.cs" />
     <Compile Include="Assets\Scripts\Managers\SpawnManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MenuUI.cs" />
     <Compile Include="Assets\Scripts\LightController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerUI.cs" />
     <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
+    <Compile Include="Assets\Scripts\UI\SceneChanger.cs" />
+    <Compile Include="Assets\Scripts\UI\Loading.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerIntetact.cs" />
     <Compile Include="Assets\Scripts\Managers\TimeManager.cs" />
     <Compile Include="Assets\Scripts\Computer.cs" />
-    <Compile Include="Assets\Scripts\ComputerUIController.cs" />
     <Compile Include="Assets\Scripts\Interactables\OrderBox.cs" />
     <Compile Include="Assets\Scripts\HitTrigger.cs" />
     <Compile Include="Assets\Scripts\DoorController.cs" />
-    <Compile Include="Assets\Scripts\MenuUI.cs" />
     <Compile Include="Assets\Scripts\Clientes\BaseClient.cs" />
     <Compile Include="Assets\Input\PlayerInput.cs" />
     <Compile Include="Assets\Scripts\Managers\UIManager.cs" />
@@ -85,9 +86,9 @@
     <Compile Include="Assets\Scripts\Interactable.cs" />
     <Compile Include="Assets\Scripts\Clientes\HurryClient.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMotor.cs" />
-    <Compile Include="Assets\Scripts\Loading.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerLook.cs" />
     <Compile Include="Assets\Scripts\Clientes\MysteriousClient.cs" />
+    <Compile Include="Assets\Scripts\UI\ComputerUIController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Dynamic Grass FX\Shaders\Helpers.cginc" />

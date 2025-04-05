@@ -11,11 +11,13 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor; 
 
     public PlayerInput.OnFootActions onFoot;
+    public PlayerInput.OnChangeActions onChange;
     // Start is called before the first frame update
     void Awake()
     {
         playerInput = new PlayerInput();
         onFoot = playerInput.OnFoot;
+        onChange = playerInput.OnChange;
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
         onFoot.Jump.performed += ctx => motor.Jump();
@@ -35,9 +37,11 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         onFoot.Enable();
+        onChange.Enable();
     }
     private void OnDisable()
     {
         onFoot.Disable();
+        onChange.Disable();
     }
 }

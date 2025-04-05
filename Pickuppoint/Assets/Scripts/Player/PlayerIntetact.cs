@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class PlayerIntetact : MonoBehaviour
@@ -10,7 +11,8 @@ public class PlayerIntetact : MonoBehaviour
     private PlayerUI playerUI;
     private InputManager inputManager;
     private Interactable currentInteractable;
-
+    [SerializeField] private GameObject menu;
+    public bool menuisopen = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,5 +57,33 @@ public class PlayerIntetact : MonoBehaviour
             Vector3 throwDirection = ray.direction;  // Используем направление луча
             currentInteractable.BaseThrow(throwDirection);
         }
+        if (inputManager.onChange.OpenMenu.triggered)
+        {
+            Debug.Log("Открыть меню");
+            menu.SetActive(!menuisopen);
+            if(menuisopen)
+            {
+                inputManager.onFoot.Enable();
+            }
+            else
+            {
+                inputManager.onFoot.Disable();
+            }
+            menuisopen = !menuisopen;
+        }
+    }
+
+    public void CloseMenu()
+    {
+        menu.SetActive(!menuisopen);
+        if (menuisopen)
+        {
+            inputManager.onFoot.Enable();
+        }
+        else
+        {
+            inputManager.onFoot.Disable();
+        }
+        menuisopen = !menuisopen;
     }
 }
