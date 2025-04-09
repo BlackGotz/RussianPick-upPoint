@@ -1,15 +1,15 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+
 
 public class SpawnManager : MonoBehaviour
 {
     public static SpawnManager Instance;
 
     [Header("—павн клиентов и коробок")]
-    public GameObject ordinaryClientPrefab;
-    public GameObject hurryClientPrefab;
-    public GameObject mysteriousClientPrefab;
+    public GameObject[] clientModels; // ¬се возможные модели клиентов
     public Transform clientSpawnPoint;
     public Transform pickupPoint;
     public GameObject boxPrefab;
@@ -24,6 +24,8 @@ public class SpawnManager : MonoBehaviour
     private bool isClientActive = false;
     private float timeToNextClient;
 
+    private Type[] clientTypes = new Type[] { typeof(OrdinaryClient), typeof(HurryClient), typeof(MysteriousClient) };
+
     private void Awake()
     {
         if (Instance == null)
@@ -34,7 +36,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        timeToNextClient = (float)Random.Range(5, 10);
+        timeToNextClient = (float)UnityEngine.Random.Range(5, 20);
         SpawnBoxes();
         TimeManager.Instance.OnTimeUpdated += OnTimeUpdated;
     }
@@ -53,14 +55,14 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnBoxes()
     {
-        int boxesCount = Random.Range(minBoxes, maxBoxes + 1);
+        int boxesCount = UnityEngine.Random.Range(minBoxes, maxBoxes + 1);
         Debug.Log(" оличество коробок: " + boxesCount);
         for (int i = 0; i < boxesCount; i++)
         {
-            Vector2 randomCircle = Random.insideUnitCircle * 1f;
+            Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * 1f;
             Vector3 spawnPos = boxSpawnPoint.position + new Vector3(randomCircle.x, 0, randomCircle.y);
             GameObject boxObj = Instantiate(boxPrefab, spawnPos, Quaternion.identity);
-            int boxNumber = Random.Range(10000, 99999);
+            int boxNumber = UnityEngine.Random.Range(10000, 99999);
             Box box = boxObj.GetComponent<Box>();
             box.SetupBox(boxNumber);
             availableBoxNumbers.Add(boxNumber);
@@ -69,34 +71,40 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnClient()
     {
-        int index = Random.Range(0, availableBoxNumbers.Count);
+        int index = UnityEngine.Random.Range(0, availableBoxNumbers.Count);
         int requiredNumber = availableBoxNumbers[index];
 
         Vector3 direction = (pickupPoint.position - clientSpawnPoint.position).normalized;
         Quaternion spawnRotation = Quaternion.LookRotation(direction);
 
-        // —лучайно выбираем тип клиента: 0 Ц обычный, 1 Ц спешащий, 2 Ц загадочный
-        int clientType = Random.Range(0, 3);
-        GameObject clientObj = null;
-        switch (clientType)
+        // ¬ыбираем модель клиента
+        GameObject selectedModel = clientModels[UnityEngine.Random.Range(0, 10) % 2];
+        GameObject clientObj = Instantiate(selectedModel, clientSpawnPoint.position, spawnRotation);
+
+        // ¬ыбираем тип поведени€ клиента
+        Type clientType;
+
+        int rand = UnityEngine.Random.Range(0, 100);
+        if (rand < 50) // 0Ц49
         {
-            case 0:
-                clientObj = Instantiate(ordinaryClientPrefab, clientSpawnPoint.position, spawnRotation);
-                Debug.Log("ќригинальный клиент");
-                break;
-            case 1:
-                clientObj = Instantiate(hurryClientPrefab, clientSpawnPoint.position, spawnRotation);
-                Debug.Log("—пешащий клиен");
-                break;
-            case 2:
-                clientObj = Instantiate(mysteriousClientPrefab, clientSpawnPoint.position, spawnRotation);
-                Debug.Log("«агадочный мудак");
-                break;
+            clientType = typeof(OrdinaryClient);
+        }
+        else if (rand < 80) // 50Ц79
+        {
+            clientType = typeof(HurryClient);
+        }
+        else // 80Ц99
+        {
+            clientType = typeof(MysteriousClient);
         }
 
-        BaseClient client = clientObj.GetComponent<BaseClient>();
+        BaseClient client = (BaseClient)clientObj.AddComponent(clientType);
+
         client.SetupClient(requiredNumber, pickupPoint);
         isClientActive = true;
+
+        Debug.Log("clientType " + clientType);
+        Debug.Log("requiredNumber " + requiredNumber);
     }
 
     /// <summary>
@@ -109,7 +117,7 @@ public class SpawnManager : MonoBehaviour
         {
             availableBoxNumbers.Remove(deliveredBoxNumber);
         }
-        timeToNextClient = (float)Random.Range(5, 10);
+        timeToNextClient = (float)UnityEngine.Random.Range(5, 20);
         Debug.Log("¬рем€ до клиента" + timeToNextClient);
         //UIManager.Instance.HidePhoneDisplay();
     }
