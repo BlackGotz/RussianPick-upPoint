@@ -36,7 +36,7 @@ public class SpawnManager : MonoBehaviour
 
     private void Start()
     {
-        timeToNextClient = (float)UnityEngine.Random.Range(5, 10);
+        timeToNextClient = (float)UnityEngine.Random.Range(5, 20);
         SpawnBoxes();
         TimeManager.Instance.OnTimeUpdated += OnTimeUpdated;
     }
@@ -78,11 +78,26 @@ public class SpawnManager : MonoBehaviour
         Quaternion spawnRotation = Quaternion.LookRotation(direction);
 
         // ¬ыбираем модель клиента
-        GameObject selectedModel = clientModels[UnityEngine.Random.Range(0, clientModels.Length)];
+        GameObject selectedModel = clientModels[UnityEngine.Random.Range(0, 10) % 2];
         GameObject clientObj = Instantiate(selectedModel, clientSpawnPoint.position, spawnRotation);
 
         // ¬ыбираем тип поведени€ клиента
-        Type clientType = clientTypes[UnityEngine.Random.Range(0, clientTypes.Length)];
+        Type clientType;
+
+        int rand = UnityEngine.Random.Range(0, 100);
+        if (rand < 50) // 0Ц49
+        {
+            clientType = typeof(OrdinaryClient);
+        }
+        else if (rand < 80) // 50Ц79
+        {
+            clientType = typeof(HurryClient);
+        }
+        else // 80Ц99
+        {
+            clientType = typeof(MysteriousClient);
+        }
+
         BaseClient client = (BaseClient)clientObj.AddComponent(clientType);
 
         client.SetupClient(requiredNumber, pickupPoint);
@@ -102,7 +117,7 @@ public class SpawnManager : MonoBehaviour
         {
             availableBoxNumbers.Remove(deliveredBoxNumber);
         }
-        timeToNextClient = (float)UnityEngine.Random.Range(5, 10);
+        timeToNextClient = (float)UnityEngine.Random.Range(5, 20);
         Debug.Log("¬рем€ до клиента" + timeToNextClient);
         //UIManager.Instance.HidePhoneDisplay();
     }

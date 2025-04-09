@@ -10682,6 +10682,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clientModels:
   - {fileID: 849919455824956727, guid: a918afdb9de181440acdf916c1258a10, type: 3}
+  - {fileID: 756061870341616891, guid: e76ff3140dc945444ac6e0f20d0491e7, type: 3}
   clientSpawnPoint: {fileID: 297573834}
   pickupPoint: {fileID: 598900375}
   boxPrefab: {fileID: 1192641458597302, guid: 6061446c8858f044aa288f9a9c2e1c8a, type: 3}
