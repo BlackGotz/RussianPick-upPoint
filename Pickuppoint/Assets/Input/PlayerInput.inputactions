@@ -18,7 +18,7 @@
                     "name": "Submit",
                     "type": "Button",
                     "id": "771a613a-2de5-4261-8b82-7d6e3e6cc14a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -27,7 +27,7 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "bea3a306-2577-4663-8951-7b4fea8adfff",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -664,6 +664,34 @@
                     "processors": "",
                     "groups": "",
                     "action": "Throw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "OnChange",
+            "id": "05d40f59-f70d-4c64-ae2e-a3b36512ec5f",
+            "actions": [
+                {
+                    "name": "OpenMenu",
+                    "type": "Button",
+                    "id": "fa45d7b5-37f7-4144-afdf-5a530a1891dc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "dd3f5fe6-ea06-4f7c-b41e-2ff6a7ff396e",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

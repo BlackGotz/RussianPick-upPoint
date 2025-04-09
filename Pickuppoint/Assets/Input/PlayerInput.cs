@@ -40,7 +40,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""771a613a-2de5-4261-8b82-7d6e3e6cc14a"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -49,7 +49,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""name"": ""Cancel"",
                     ""type"": ""Button"",
                     ""id"": ""bea3a306-2577-4663-8951-7b4fea8adfff"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -690,6 +690,34 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""OnChange"",
+            ""id"": ""05d40f59-f70d-4c64-ae2e-a3b36512ec5f"",
+            ""actions"": [
+                {
+                    ""name"": ""OpenMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa45d7b5-37f7-4144-afdf-5a530a1891dc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""dd3f5fe6-ea06-4f7c-b41e-2ff6a7ff396e"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -713,12 +741,16 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Look = m_OnFoot.FindAction("Look", throwIfNotFound: true);
         m_OnFoot_Interact = m_OnFoot.FindAction("Interact", throwIfNotFound: true);
         m_OnFoot_Throw = m_OnFoot.FindAction("Throw", throwIfNotFound: true);
+        // OnChange
+        m_OnChange = asset.FindActionMap("OnChange", throwIfNotFound: true);
+        m_OnChange_OpenMenu = m_OnChange.FindAction("OpenMenu", throwIfNotFound: true);
     }
 
     ~@PlayerInput()
     {
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, PlayerInput.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_OnFoot.enabled, "This will cause a leak and performance issues, PlayerInput.OnFoot.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_OnChange.enabled, "This will cause a leak and performance issues, PlayerInput.OnChange.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -972,6 +1004,52 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         }
     }
     public OnFootActions @OnFoot => new OnFootActions(this);
+
+    // OnChange
+    private readonly InputActionMap m_OnChange;
+    private List<IOnChangeActions> m_OnChangeActionsCallbackInterfaces = new List<IOnChangeActions>();
+    private readonly InputAction m_OnChange_OpenMenu;
+    public struct OnChangeActions
+    {
+        private @PlayerInput m_Wrapper;
+        public OnChangeActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OpenMenu => m_Wrapper.m_OnChange_OpenMenu;
+        public InputActionMap Get() { return m_Wrapper.m_OnChange; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(OnChangeActions set) { return set.Get(); }
+        public void AddCallbacks(IOnChangeActions instance)
+        {
+            if (instance == null || m_Wrapper.m_OnChangeActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_OnChangeActionsCallbackInterfaces.Add(instance);
+            @OpenMenu.started += instance.OnOpenMenu;
+            @OpenMenu.performed += instance.OnOpenMenu;
+            @OpenMenu.canceled += instance.OnOpenMenu;
+        }
+
+        private void UnregisterCallbacks(IOnChangeActions instance)
+        {
+            @OpenMenu.started -= instance.OnOpenMenu;
+            @OpenMenu.performed -= instance.OnOpenMenu;
+            @OpenMenu.canceled -= instance.OnOpenMenu;
+        }
+
+        public void RemoveCallbacks(IOnChangeActions instance)
+        {
+            if (m_Wrapper.m_OnChangeActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IOnChangeActions instance)
+        {
+            foreach (var item in m_Wrapper.m_OnChangeActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_OnChangeActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public OnChangeActions @OnChange => new OnChangeActions(this);
     public interface IUIActions
     {
         void OnNavigate(InputAction.CallbackContext context);
@@ -992,5 +1070,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnThrow(InputAction.CallbackContext context);
+    }
+    public interface IOnChangeActions
+    {
+        void OnOpenMenu(InputAction.CallbackContext context);
     }
 }

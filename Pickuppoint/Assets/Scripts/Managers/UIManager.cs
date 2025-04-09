@@ -1,12 +1,13 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
     [Header("Ёлементы UI")]
-    public TextMeshProUGUI timeText;
+    public List<TextMeshProUGUI> textList;
     public GameObject phoneDisplay;
     public TextMeshPro phoneText;
 
@@ -28,7 +29,10 @@ public class UIManager : MonoBehaviour
     {
         int hours = Mathf.FloorToInt(currentTime / 60);
         int minutes = Mathf.FloorToInt(currentTime % 60);
-        timeText.text = string.Format("{0:00}:{1:00}", hours, minutes);
+        foreach (var item in textList)
+        {
+            item.text = string.Format("{0:00}:{1:00}", hours, minutes);
+        }
     }
 
     public void ShowClientPhone(string orderNumber)
