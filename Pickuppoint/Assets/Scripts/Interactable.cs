@@ -18,6 +18,7 @@ public abstract class Interactable : MonoBehaviour
     {
         Interact();
     }
+
     public void BaseThrow(Vector3 throwDirection)
     {
         IsThrown = true; // Устанавливаем флаг при броске

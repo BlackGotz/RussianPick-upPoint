@@ -7,6 +7,7 @@ TagManager:
   - Grounded
   - OrderBox
   - Client
+  - Door
   layers:
   - Default
   - TransparentFX

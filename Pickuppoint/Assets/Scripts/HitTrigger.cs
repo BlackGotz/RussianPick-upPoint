@@ -20,6 +20,10 @@ public class HitTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Interactable item = other.GetComponent<Interactable>();
+
+        if (item == null)
+            return;
+
         if (item.GetIsThrown())
         {
             currentClient.InstantLeave();

@@ -18,7 +18,10 @@ public class OrderBox : Interactable
     {
         if (!isHeld)
         {
-            PickUp();
+            if (playerHand.childCount == 0)
+            {
+                PickUp();
+            }
         }
         else
         {
