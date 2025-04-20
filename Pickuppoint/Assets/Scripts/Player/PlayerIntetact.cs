@@ -13,6 +13,7 @@ public class PlayerIntetact : MonoBehaviour
     private Interactable currentInteractable;
     [SerializeField] private GameObject menu;
     public bool menuisopen = false;
+    public VolumeControl volumeControl;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +71,8 @@ public class PlayerIntetact : MonoBehaviour
                 inputManager.onFoot.Disable();
             }
             menuisopen = !menuisopen;
+
+            volumeControl.RevertSettings();
         }
     }
 
