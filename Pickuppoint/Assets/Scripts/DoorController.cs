@@ -5,12 +5,15 @@ using UnityEngine;
 public class DoorController : Interactable
 {
     [SerializeField] private Transform _door;
+    [SerializeField] private AudioSource doorAudioSource;
+
     public bool open = false;
     public float speed = 90f; // Градусы в секунду
     private float targetAngle;
     private float closedAngle;
     private float openAngle;
     public float side = 1f;
+
     private void Start()
     {
         // Устанавливаем начальный угол двери
@@ -42,7 +45,9 @@ public class DoorController : Interactable
             open = true;
             targetAngle = openAngle;
             promptMessage = "Press 'E' to close";
-            
+
+            doorAudioSource.Play();
+
         }
     }
 
@@ -54,6 +59,8 @@ public class DoorController : Interactable
             open = false;
             targetAngle = closedAngle;
             promptMessage = "Press 'E' to open";
+
+            doorAudioSource.Play();
         }
     }
 }

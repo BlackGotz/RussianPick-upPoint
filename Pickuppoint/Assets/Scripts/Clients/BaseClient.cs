@@ -3,6 +3,8 @@ using TMPro;
 
 public abstract class BaseClient : MonoBehaviour
 {
+    protected ClientSFX _sfxController;
+
     public int requiredBoxNumber;
     public float moveSpeed = 2f;
     public float maxPatience = 50f;
@@ -25,6 +27,8 @@ public abstract class BaseClient : MonoBehaviour
         isDelivered = false;
         ToggleRecieveTrigger(false);
 
+        _sfxController = GetComponentInChildren<ClientSFX>();
+
         if (patienceBar == null)
             patienceBar = GetComponentInChildren<PatienceBar>();
 
@@ -32,6 +36,10 @@ public abstract class BaseClient : MonoBehaviour
             patienceBar.gameObject.SetActive(false);
 
     }
+
+    public void PlayHappySound() => _sfxController?.PlaySound(ClientSoundType.Happy);
+    public void PlayAngrySound() => _sfxController?.PlaySound(ClientSoundType.Angry);
+    public void PlayOrderSound() => _sfxController?.PlaySound(ClientSoundType.Order);
 
     protected virtual void Update()
     {
@@ -49,6 +57,8 @@ public abstract class BaseClient : MonoBehaviour
                     patienceBar.UpdateBar(currentPatience, maxPatience);
 
                     ToggleRecieveTrigger(true); // Включаем триггер
+
+                    PlayOrderSound();
                 }
                 break;
 
@@ -57,7 +67,7 @@ public abstract class BaseClient : MonoBehaviour
 
                 if (currentPatience <= 0f)
                 {
-                    PrepareToLeave();
+                    PrepareToLeave();                  
                 }
                 else 
                     patienceBar.UpdateBar(currentPatience, maxPatience);
@@ -141,6 +151,8 @@ public abstract class BaseClient : MonoBehaviour
         if (box.boxNumber == requiredBoxNumber)
         {
             Debug.Log("Коробка доставлена успешно!");
+            PlayHappySound();
+
             Destroy(box.gameObject);
             isDelivered = true;
             // При получении коробки клиент сразу готов уйти
@@ -158,13 +170,13 @@ public abstract class BaseClient : MonoBehaviour
 
     public virtual void InstantLeave()
     {
-        if (state == ClientState.MovingToPickup) 
+        PlayAngrySound();
+
+        if (state == ClientState.MovingToPickup)
         {
             PrepareToLeave();
         }
         else
-        {
             currentPatience = 0f;
-        }
     }
 }
