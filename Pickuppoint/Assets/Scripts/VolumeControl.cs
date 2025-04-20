@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using TMPro;
 
 public class VolumeControl : MonoBehaviour
 {
     public AudioMixer audioMixer; // Перетаскиваем MainMixer
     public Slider musicSlider;
     public Slider sfxSlider;
+
+    [SerializeField] private TMP_Text musicVolumeText;
+    [SerializeField] private TMP_Text sfxVolumeText;
 
     // Временные переменные для хранения текущих (не сохранённых) значений
     private float _tempMusicVolume;
@@ -26,33 +30,55 @@ public class VolumeControl : MonoBehaviour
         musicSlider.value = _lastSavedMusicVolume;
         sfxSlider.value = _lastSavedSFXVolume;
 
-        _tempMusicVolume = _lastSavedMusicVolume;
-        _tempSFXVolume = _lastSavedSFXVolume;
+        // Обновление текста
+        UpdateVolumeText(musicVolumeText, _lastSavedMusicVolume);
+        UpdateVolumeText(sfxVolumeText, _lastSavedSFXVolume);
 
-        // Применяем сохранённую громкость
-        ApplyMusicVolume(_lastSavedMusicVolume);
-        ApplySFXVolume(_lastSavedSFXVolume);
+        // Применение громкости
+        ApplyVolume("MusicVolume", _lastSavedMusicVolume);
+        ApplyVolume("SFXVolume", _lastSavedSFXVolume);
     }
 
     // Вызывается при изменении слайдера музыки
     public void OnMusicSliderChanged(float value)
     {
-        _tempMusicVolume = value;
-        ApplyMusicVolume(value); // Временное применение
+        ApplyVolume("MusicVolume", value);
+        UpdateVolumeText(musicVolumeText, value);
     }
 
     // Вызывается при изменении слайдера SFX
     public void OnSFXSliderChanged(float value)
     {
-        _tempSFXVolume = value;
-        ApplySFXVolume(value); // Временное применение
+        ApplyVolume("SFXVolume", value);
+        UpdateVolumeText(sfxVolumeText, value);
+    }
+
+    private void ApplyVolume(string mixerParam, float value)
+    {
+        if (value <= 0.001f) // Проверка на ~0
+        {
+            audioMixer.SetFloat(mixerParam, -80f); // Минимальная громкость в микшере
+        }
+        else
+        {
+            audioMixer.SetFloat(mixerParam, Mathf.Log10(value) * 20);
+        }
+    }
+
+    private void UpdateVolumeText(TMP_Text textElement, float value)
+    {
+        if (textElement != null)
+        {
+            int percent = Mathf.RoundToInt(value * 100);
+            textElement.text = $"{percent}%";
+        }
     }
 
     // Сохраняет настройки (вызывается при нажатии "Сохранить")
     public void SaveSettings()
     {
-        _lastSavedMusicVolume = _tempMusicVolume;
-        _lastSavedSFXVolume = _tempSFXVolume;
+        _lastSavedMusicVolume = musicSlider.value;
+        _lastSavedSFXVolume = sfxSlider.value;
 
         PlayerPrefs.SetFloat("MusicVolume", _lastSavedMusicVolume);
         PlayerPrefs.SetFloat("SFXVolume", _lastSavedSFXVolume);
@@ -64,27 +90,10 @@ public class VolumeControl : MonoBehaviour
     // Откатывает настройки (вызывается при нажатии "Назад")
     public void RevertSettings()
     {
-        _tempMusicVolume = _lastSavedMusicVolume;
-        _tempSFXVolume = _lastSavedSFXVolume;
-
         musicSlider.value = _lastSavedMusicVolume;
         sfxSlider.value = _lastSavedSFXVolume;
 
-        ApplyMusicVolume(_lastSavedMusicVolume);
-        ApplySFXVolume(_lastSavedSFXVolume);
-
-        Debug.Log("Изменения отменены!");
-    }
-
-    // Применяет громкость музыки (логарифмическая шкала)
-    private void ApplyMusicVolume(float volume)
-    {
-        audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
-    }
-
-    // Применяет громкость SFX (логарифмическая шкала)
-    private void ApplySFXVolume(float volume)
-    {
-        audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
+        OnMusicSliderChanged(_lastSavedMusicVolume);
+        OnSFXSliderChanged(_lastSavedSFXVolume);
     }
 }
