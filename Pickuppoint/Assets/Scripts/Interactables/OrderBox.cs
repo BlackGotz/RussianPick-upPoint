@@ -8,6 +8,8 @@ public class OrderBox : Interactable
     private bool isHeld = false;  // Флаг, держит ли игрок предмет
     public float throwForce = 10f; // Сила броска
 
+    
+
     void Start()
     {
         // Находим объект "Hand" в сцене (должен быть у игрока)

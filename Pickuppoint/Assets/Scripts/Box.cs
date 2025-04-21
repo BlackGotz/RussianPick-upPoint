@@ -1,25 +1,28 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class Box : MonoBehaviour
 {
     public int boxNumber;
-    private TextMeshPro boxNumberDisplay;
+    [SerializeField] private TextMeshPro[] boxNumberDisplays; // массив всех надписей на коробке
 
     private void Awake()
     {
-        // Если ссылка не задана через инспектор, попытаемся найти Text среди дочерних объектов.
-        if (boxNumberDisplay == null)
+        // Если массив не задан в инспекторе — попытаемся найти все TextMeshPro среди детей
+        if (boxNumberDisplays == null || boxNumberDisplays.Length == 0)
         {
-            boxNumberDisplay = GetComponentInChildren<TextMeshPro>();
+            boxNumberDisplays = GetComponentsInChildren<TextMeshPro>();
         }
     }
 
     public void SetupBox(int number)
     {
         boxNumber = number;
-        if (boxNumberDisplay != null)
-            boxNumberDisplay.text = boxNumber.ToString();
+
+        foreach (var display in boxNumberDisplays)
+        {
+            if (display != null)
+                display.text = boxNumber.ToString();
+        }
     }
 }

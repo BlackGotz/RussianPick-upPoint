@@ -7,7 +7,7 @@ public abstract class BaseClient : MonoBehaviour
 
     public int requiredBoxNumber;
     public float moveSpeed = 2f;
-    public float maxPatience = 50f;
+    public float maxPatience = 40f;
     public float currentPatience;
     Animator animator;
     protected enum ClientState { MovingToPickup, Waiting, Leaving }
@@ -67,7 +67,8 @@ public abstract class BaseClient : MonoBehaviour
 
                 if (currentPatience <= 0f)
                 {
-                    PrepareToLeave();                  
+                    PrepareToLeave();
+                    PlayAngrySound();
                 }
                 else 
                     patienceBar.UpdateBar(currentPatience, maxPatience);
@@ -161,7 +162,7 @@ public abstract class BaseClient : MonoBehaviour
         else
         {
             Debug.Log("Неверная коробка");
-            currentPatience -= maxPatience / 3f;
+            currentPatience -= maxPatience / 4f;
         }
 
 
@@ -170,11 +171,10 @@ public abstract class BaseClient : MonoBehaviour
 
     public virtual void InstantLeave()
     {
-        PlayAngrySound();
-
         if (state == ClientState.MovingToPickup)
         {
-            PrepareToLeave();
+            state = ClientState.Waiting;
+            currentPatience = 0f;
         }
         else
             currentPatience = 0f;

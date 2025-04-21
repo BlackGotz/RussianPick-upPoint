@@ -24,6 +24,9 @@ public class DoorController : Interactable
 
     protected override void Interact()
     {
+        if (CompareTag("Door"))
+            return;
+
         open = !open;
         targetAngle = open ? openAngle : closedAngle;
         promptMessage = open ? "Press 'E' to close" : "Press 'E' to open";
@@ -44,7 +47,6 @@ public class DoorController : Interactable
             //Debug.Log("enter");
             open = true;
             targetAngle = openAngle;
-            promptMessage = "Press 'E' to close";
 
             doorAudioSource.Play();
 
@@ -58,7 +60,6 @@ public class DoorController : Interactable
             //Debug.Log("exit");
             open = false;
             targetAngle = closedAngle;
-            promptMessage = "Press 'E' to open";
 
             doorAudioSource.Play();
         }
