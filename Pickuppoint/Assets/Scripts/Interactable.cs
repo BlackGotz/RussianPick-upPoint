@@ -21,7 +21,6 @@ public abstract class Interactable : MonoBehaviour
 
     public void BaseThrow(Vector3 throwDirection)
     {
-        IsThrown = true; // Устанавливаем флаг при броске
         Throw(throwDirection); // Вызываем переопределённый метод для манипуляций с Rigidbody
         StartCoroutine(CheckIfLanded()); // Запускаем проверку приземления
     }
@@ -41,6 +40,11 @@ public abstract class Interactable : MonoBehaviour
         return IsThrown;
     }
 
+    public void InvertFlagThrow()
+    {
+        IsThrown = !IsThrown;
+    }
+
     private IEnumerator CheckIfLanded()
     {
         while (IsThrown)
@@ -49,7 +53,7 @@ public abstract class Interactable : MonoBehaviour
 
             if (rb != null && rb.velocity.magnitude < 0.1f) // Если объект почти остановился
             {
-                IsThrown = false;
+                InvertFlagThrow();
                 Debug.Log($"{gameObject.name} приземлился!");
             }
         }

@@ -16,8 +16,8 @@ public class SpawnManager : MonoBehaviour
     public Transform boxSpawnPoint;
 
     [Header("Настройки коробок")]
-    public int minBoxes = 3;
-    public int maxBoxes = 7;
+    public int minBoxes = 5;
+    public int maxBoxes = 9;
     public float boxesSpawnDeadline = 17 * 60f; // до 17:00
 
     private List<int> availableBoxNumbers = new List<int>();

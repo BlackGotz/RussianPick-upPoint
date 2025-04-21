@@ -33314,6 +33314,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1719329294}
     - target: {fileID: 4773664807886633366, guid: 7fea3e7e76f32834fad327841cc05ec4, type: 3}
+      propertyPath: volumeControl
+      value: 
+      objectReference: {fileID: 192206427}
+    - target: {fileID: 4773664807886633366, guid: 7fea3e7e76f32834fad327841cc05ec4, type: 3}
       propertyPath: player.Array.size
       value: 3
       objectReference: {fileID: 0}

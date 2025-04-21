@@ -76,6 +76,7 @@ public class OrderBox : Interactable
 
                 // «адаем бросок в направлении взгл€да игрока
                 rb.AddForce(direction * throwForce, ForceMode.VelocityChange);
+                InvertFlagThrow();
             }
 
             // ”бираем родител€ после броска
