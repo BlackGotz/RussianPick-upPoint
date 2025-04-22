@@ -5,24 +5,39 @@ using UnityEngine;
 public class OrderBox : Interactable
 {
     private Transform playerHand; // Ссылка на руку игрока
+    PlayerHand phCondition;
     private bool isHeld = false;  // Флаг, держит ли игрок предмет
     public float throwForce = 10f; // Сила броска
+    public float pickUpSpeed = 1500f; // Скорость поднятия предмета
+    public float maxPickUpDistance = 2f; // Максимальное расстояние поднятия
+    [SerializeField] private LayerMask collisionLayers; // Слои для проверки коллизий
 
-    
+    private Vector3 targetPosition;
+    private bool isMovingToHand = false;
 
     void Start()
     {
         // Находим объект "Hand" в сцене (должен быть у игрока)
         playerHand = GameObject.Find("Hand").transform;
+        phCondition = playerHand.GetComponent<PlayerHand>();
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        if (isMovingToHand)
+        {
+            MoveToHand();
+        }
     }
 
     protected override void Interact()
     {
         if (!isHeld)
         {
-            if (playerHand.childCount == 0)
+            if (!phCondition.IsBusy)
             {
-                PickUp();
+                StartPickUp();
             }
         }
         else
@@ -31,29 +46,53 @@ public class OrderBox : Interactable
         }
     }
 
-    private void PickUp()
+    private void StartPickUp()
     {
         // Отключаем физику
-        Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.isKinematic = true;
             rb.useGravity = false;
+            rb.isKinematic = true;
         }
 
-        // Перемещаем объект в руку игрока
-        transform.position = playerHand.position;
-        transform.rotation = playerHand.rotation;
-        transform.SetParent(playerHand);
-
+        // Начинаем движение к руке
+        isMovingToHand = true;
         isHeld = true;
-        Debug.Log("Picked up " + gameObject.name);
+        phCondition.IsBusy = true;
+        Debug.Log("Starting to pick up " + gameObject.name);
+    }
+
+    private void MoveToHand()
+    {
+        // Получаем направление к руке
+        Vector3 direction = playerHand.position - transform.position;
+        float distance = direction.magnitude;
+
+        if (distance > 2f)
+            Drop();
+
+        // Проверяем коллизии по пути
+        RaycastHit hit;
+        bool hasHit = Physics.Raycast(transform.position, direction.normalized, out hit, distance, collisionLayers);
+
+        if (hasHit)
+        {
+            // Если есть препятствие, перемещаемся к точке перед препятствием
+            targetPosition = hit.point - direction.normalized * 0.5f; // небольшой отступ
+        }
+        else
+        {
+            // Если препятствий нет, перемещаемся к руке
+            targetPosition = playerHand.position;
+        }
+
+        // Интерполируем позицию
+        transform.position = Vector3.Lerp(transform.position, targetPosition, pickUpSpeed);
     }
 
     private void Drop()
     {
         // Включаем физику обратно
-        Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.isKinematic = false;
@@ -64,6 +103,8 @@ public class OrderBox : Interactable
         transform.SetParent(null);
 
         isHeld = false;
+        isMovingToHand = false;
+        phCondition.IsBusy = false;
         Debug.Log("Dropped " + gameObject.name);
     }
 
@@ -84,6 +125,8 @@ public class OrderBox : Interactable
             // Убираем родителя после броска
             transform.SetParent(null);
             isHeld = false;
+            isMovingToHand = false;
+            phCondition.IsBusy = false;
             Debug.Log("Threw " + gameObject.name);
         }
     }

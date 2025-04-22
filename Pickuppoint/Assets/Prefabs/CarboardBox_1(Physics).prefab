@@ -109,7 +109,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.59999996, y: 0.60754, z: 0.59999996}
+  m_Size: {x: 0.59999996, y: 0.6, z: 0.59999996}
   m_Center: {x: 0, y: 0.0037700385, z: 0}
 --- !u!54 &54157987518180096
 Rigidbody:
@@ -152,6 +152,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptMessage: Press 'E' to grab
   throwForce: 10
+  pickUpSpeed: 5
+  maxPickUpDistance: 2
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 384
 --- !u!114 &7114874909934211981
 MonoBehaviour:
   m_ObjectHideFlags: 0
