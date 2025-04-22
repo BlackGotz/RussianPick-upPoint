@@ -28,8 +28,7 @@ public class SpawnManager : MonoBehaviour
     private float timeToNextClient;
 
     private Type[] clientTypes = new Type[] { typeof(OrdinaryClient), typeof(HurryClient), typeof(MysteriousClient) };
-
-    private void Awake()
+    private void Start()
     {
         if (Instance == null)
             Instance = this;
@@ -37,10 +36,6 @@ public class SpawnManager : MonoBehaviour
             Destroy(gameObject);
 
         CollectAllSpawnPoints();
-    }
-
-    private void Start()
-    {
         timeToNextClient = (float)UnityEngine.Random.Range(5, 20);
         SpawnBoxesMorning();
         TimeManager.Instance.OnTimeUpdated += OnTimeUpdated;
