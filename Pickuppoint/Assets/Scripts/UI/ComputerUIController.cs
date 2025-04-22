@@ -6,7 +6,7 @@ public class ComputerUIController : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _closedComponents;
     [SerializeField] private List<GameObject> _openComponents;
-
+    
     public void CloseAndOpen()
     {
         foreach (var component in _openComponents)
