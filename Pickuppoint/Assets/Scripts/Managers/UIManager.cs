@@ -8,8 +8,10 @@ public class UIManager : MonoBehaviour
 
     [Header("Элементы UI")]
     public List<TextMeshProUGUI> textList;
+    public TextMeshProUGUI finishText;
     public GameObject phoneDisplay;
     public TextMeshPro phoneText;
+
 
     private void Awake()
     {
@@ -23,6 +25,7 @@ public class UIManager : MonoBehaviour
     {
         TimeManager.Instance.OnTimeUpdated += UpdateTimeUI;
         HidePhoneDisplay();
+        TimeManager.Instance.OnDayEnded += FinishDay;
     }
 
     private void UpdateTimeUI(float currentTime)
@@ -47,5 +50,10 @@ public class UIManager : MonoBehaviour
     {
         if (phoneDisplay != null)
             phoneDisplay.SetActive(false);
+    }
+
+    public void FinishDay()
+    {
+        finishText.text = "Завершите смену)";
     }
 }

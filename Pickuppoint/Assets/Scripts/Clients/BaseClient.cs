@@ -3,9 +3,11 @@ using TMPro;
 
 public abstract class BaseClient : MonoBehaviour
 {
+    protected ClientSFX _sfxController;
+
     public int requiredBoxNumber;
     public float moveSpeed = 2f;
-    public float maxPatience = 50f;
+    public float maxPatience = 40f;
     public float currentPatience;
     Animator animator;
     protected enum ClientState { MovingToPickup, Waiting, Leaving }
@@ -25,6 +27,8 @@ public abstract class BaseClient : MonoBehaviour
         isDelivered = false;
         ToggleRecieveTrigger(false);
 
+        _sfxController = GetComponentInChildren<ClientSFX>();
+
         if (patienceBar == null)
             patienceBar = GetComponentInChildren<PatienceBar>();
 
@@ -32,6 +36,10 @@ public abstract class BaseClient : MonoBehaviour
             patienceBar.gameObject.SetActive(false);
 
     }
+
+    public void PlayHappySound() => _sfxController?.PlaySound(ClientSoundType.Happy);
+    public void PlayAngrySound() => _sfxController?.PlaySound(ClientSoundType.Angry);
+    public void PlayOrderSound() => _sfxController?.PlaySound(ClientSoundType.Order);
 
     protected virtual void Update()
     {
@@ -48,7 +56,9 @@ public abstract class BaseClient : MonoBehaviour
                     patienceBar.gameObject.SetActive(true);
                     patienceBar.UpdateBar(currentPatience, maxPatience);
 
-                    ToggleRecieveTrigger(true); // Включаем триггер
+                    ToggleRecieveTrigger(true); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+                    PlayOrderSound();
                 }
                 break;
 
@@ -58,6 +68,7 @@ public abstract class BaseClient : MonoBehaviour
                 if (currentPatience <= 0f)
                 {
                     PrepareToLeave();
+                    PlayAngrySound();
                 }
                 else 
                     patienceBar.UpdateBar(currentPatience, maxPatience);
@@ -68,7 +79,13 @@ public abstract class BaseClient : MonoBehaviour
                 MoveTo(spawnPosition);
                 if (Vector3.Distance(transform.position, spawnPosition) < 0.1f)
                 {
-                    // Клиент уходит – сообщаем менеджеру и уничтожаем объект
+                    // Р’С‹Р·С‹РІР°РµРј РјРµС‚РѕРґ ClientLeft РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РѕС‚Р·С‹РІР°
+                    if (ClientManager.Instance != null)
+                    {
+                        ClientManager.Instance.ClientLeft(this, isDelivered);
+                    }
+                    
+                    //      
                     SpawnManager.Instance.ClientFinished(requiredBoxNumber, isDelivered);
                     Destroy(gameObject);
                 }
@@ -88,7 +105,7 @@ public abstract class BaseClient : MonoBehaviour
     }
 
     /// <summary>
-    /// Включает или отключает триггер получения коробки
+    ///      
     /// </summary>
     private void ToggleRecieveTrigger(bool isActive)
     {
@@ -99,14 +116,14 @@ public abstract class BaseClient : MonoBehaviour
             if (triggerCollider != null)
             {
                 triggerCollider.enabled = isActive;
-                //Debug.Log($"RecieveTrigger {(isActive ? "активирован" : "деактивирован")} для {gameObject.name}");
+                //Debug.Log($"RecieveTrigger {(isActive ? "" : "")}  {gameObject.name}");
             }
         }
     }
 
 
     /// <summary>
-    /// Подготовка клиента к уходу – скрываем телефон, разворачиваем и переводим в состояние Leaving.
+    ///     ,    Leaving.
     /// </summary>
     protected void PrepareToLeave()
     {
@@ -114,7 +131,7 @@ public abstract class BaseClient : MonoBehaviour
         if (patienceBar != null)
             patienceBar.gameObject.SetActive(false);
 
-        ToggleRecieveTrigger(false); // Выключаем триггер
+        ToggleRecieveTrigger(false); //  
 
         TurnAround();
         animator.SetBool("move", true);
@@ -122,7 +139,7 @@ public abstract class BaseClient : MonoBehaviour
     }
 
     /// <summary>
-    /// Каждый тип клиента может переопределять, что отображать на телефоне.
+    ///     ,    .
     /// </summary>
     protected virtual string GetDisplayText()
     {
@@ -140,16 +157,18 @@ public abstract class BaseClient : MonoBehaviour
     {
         if (box.boxNumber == requiredBoxNumber)
         {
-            Debug.Log("Коробка доставлена успешно!");
+            Debug.Log("  !");
+            PlayHappySound();
+
             Destroy(box.gameObject);
             isDelivered = true;
-            // При получении коробки клиент сразу готов уйти
+            //       
             PrepareToLeave();
         }
         else
         {
-            Debug.Log("Неверная коробка");
-            currentPatience -= maxPatience / 3f;
+            Debug.Log(" ");
+            currentPatience -= maxPatience / 4f;
         }
 
 
@@ -158,13 +177,12 @@ public abstract class BaseClient : MonoBehaviour
 
     public virtual void InstantLeave()
     {
-        if (state == ClientState.MovingToPickup) 
+        if (state == ClientState.MovingToPickup)
         {
-            PrepareToLeave();
-        }
-        else
-        {
+            state = ClientState.Waiting;
             currentPatience = 0f;
         }
+        else
+            currentPatience = 0f;
     }
 }

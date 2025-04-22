@@ -14,10 +14,13 @@ public class SpawnManager : MonoBehaviour
     public Transform pickupPoint;
     public GameObject boxPrefab;
     public Transform boxSpawnPoint;
+    public BoardShelf[] boardShelves;
+
+    public List<Transform> boxSpawnPoints = new List<Transform>();
 
     [Header("Настройки коробок")]
-    public int minBoxes = 3;
-    public int maxBoxes = 7;
+    public int minBoxes = 5;
+    public int maxBoxes = 9;
     public float boxesSpawnDeadline = 17 * 60f; // до 17:00
 
     private List<int> availableBoxNumbers = new List<int>();
@@ -25,20 +28,30 @@ public class SpawnManager : MonoBehaviour
     private float timeToNextClient;
 
     private Type[] clientTypes = new Type[] { typeof(OrdinaryClient), typeof(HurryClient), typeof(MysteriousClient) };
-
-    private void Awake()
+    private void Start()
     {
         if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
+
+        CollectAllSpawnPoints();
+        timeToNextClient = (float)UnityEngine.Random.Range(5, 20);
+        SpawnBoxesMorning();
+        TimeManager.Instance.OnTimeUpdated += OnTimeUpdated;
     }
 
-    private void Start()
+    void CollectAllSpawnPoints()
     {
-        timeToNextClient = (float)UnityEngine.Random.Range(5, 20);
-        SpawnBoxes();
-        TimeManager.Instance.OnTimeUpdated += OnTimeUpdated;
+        boxSpawnPoints.Clear(); // На всякий случай
+
+        foreach (BoardShelf shelf in boardShelves)
+        {
+            if (shelf != null && shelf.spawnPoints != null)
+                boxSpawnPoints.AddRange(shelf.spawnPoints);
+        }
+
+        Debug.Log($"Объединено точек спавна: {boxSpawnPoints.Count}");
     }
 
     private void OnTimeUpdated(float currentTime)
@@ -69,6 +82,35 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    private void SpawnBoxesMorning()
+    {
+        int boxesCount = UnityEngine.Random.Range(minBoxes, maxBoxes + 1);
+        Debug.Log("Количество коробок: " + boxesCount);
+        Shuffle(boxSpawnPoints);
+
+        for (int i = 0; i < boxesCount; i++)
+        {
+            Vector3 spawnPos = boxSpawnPoints[i].position;
+            GameObject boxObj = Instantiate(boxPrefab, spawnPos, Quaternion.identity);
+            int boxNumber = UnityEngine.Random.Range(10000, 99999);
+            Box box = boxObj.GetComponent<Box>();
+            box.SetupBox(boxNumber);
+            availableBoxNumbers.Add(boxNumber);
+        }
+    }
+
+    private void Shuffle<T>(List<T> list)
+    {
+        int n = list.Count;
+        System.Random rng = new System.Random(); 
+
+        for (int i = n - 1; i > 0; i--)
+        {
+            int j = rng.Next(i + 1);
+            (list[i], list[j]) = (list[j], list[i]);
+        }
+    }
+
     private void SpawnClient()
     {
         int index = UnityEngine.Random.Range(0, availableBoxNumbers.Count);
@@ -85,11 +127,11 @@ public class SpawnManager : MonoBehaviour
         Type clientType;
 
         int rand = UnityEngine.Random.Range(0, 100);
-        if (rand < 50) // 0–49
+        if (rand < 60) // 0–49
         {
             clientType = typeof(OrdinaryClient);
         }
-        else if (rand < 80) // 50–79
+        else if (rand < 90) // 50–89
         {
             clientType = typeof(HurryClient);
         }

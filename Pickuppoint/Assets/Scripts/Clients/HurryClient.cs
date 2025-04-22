@@ -6,7 +6,7 @@ public class HurryClient : BaseClient
     {
         // У спешащего клиента скорость выше, а терпение ниже
         moveSpeed = 3f;      // Движется быстрее
-        maxPatience = 5f;    // Терпение заканчивается быстрее
+        maxPatience = 20f;    // Терпение заканчивается быстрее
         base.Start();
     }
 }
