@@ -8189,14 +8189,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8561d14811c9a842a0fd5f4cf7bb369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  balanceText: {fileID: 983960778}
-  dayText: {fileID: 1759072184}
-  ratingText: {fileID: 736817731}
-  reviewsCountText: {fileID: 1699273678}
-  balanceFormat: "\u0411\u0430\u043B\u0430\u043D\u0441: {0} \u20BD"
-  dayFormat: "\u0414\u0435\u043D\u044C: {0}"
-  ratingFormat: "\u0420\u0435\u0439\u0442\u0438\u043D\u0433: {0:0.0}/5"
-  reviewsCountFormat: "\u041E\u0442\u0437\u044B\u0432\u044B: {0}"
+  balanceText: {fileID: 404771975}
+  dayText: {fileID: 350085016}
+  ratingText: {fileID: 772667402}
+  reviewsCountText: {fileID: 804145086}
+  balanceFormat: '{0}'
+  dayFormat: '{0}'
+  ratingFormat: '{0:0.0}/5'
+  reviewsCountFormat: '{0}'
 --- !u!1001 &454785423
 PrefabInstance:
   m_ObjectHideFlags: 0
